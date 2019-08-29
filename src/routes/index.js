@@ -1,67 +1,61 @@
 import {Router} from 'express';
 import {index} from '../controller'
 import {
-    getAllDocuments,
-    getOneDocument,
-    postDocument,
-    removeOneDocument,
-    updateOneDocument
-} from "../controller/document";
+  getProducts,
+  getProduct,
+  postProduct,
+  removeProduct,
+  updateProduct
+} from "../controller/product";
 
 import {check} from "express-validator/check";
 import {postCheckValidation} from "../middleware/validation";
 
 export default () => {
-    const routes = Router();
-    routes.get('/',
-        (req, res) => index(req, res)
-    );
+  const routes = Router();
+  routes.get('/',
+    (req, res) => index(req, res)
+  );
 
-    routes.post('/document',
-        [
-            check('title').isLength({min: 4}),
-            check('description').isLength({min: 5}),
-            check('date').exists(),
-            check('content').isLength({min: 5}),
-            check('author').isLength({min: 5}),
-            check('archiveDate').exists({checkNull: false}),
-            check('isArchived').exists({checkFalsy: false})
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => postDocument(req, res));
+  routes.post('/product',
+    [
+      check('name').isLength({min: 4}),
+      check('description').isLength({min: 2}),
+      check('price').exists()
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => postProduct(req, res));
 
-    routes.get('/documents',
-        getAllDocuments
-    );
+  routes.get('/products',
+    getProducts
+  );
 
-    routes.get('/document',
-        [
-            check('id').isString()
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => getOneDocument(req, res)
-    );
+  routes.get('/product',
+    [
+      check('id').isString()
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => getProduct(req, res)
+  );
 
-    routes.delete('/document',
-        [
-            check('id').isString()
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => removeOneDocument(req, res)
-    );
+  routes.delete('/product',
+    [
+      check('id').isString()
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => removeProduct(req, res)
+  );
 
-    routes.put('/document',
-        [
-            check('id').isString(),
-            check('title').isLength({min: 4}),
-            check('description').isLength({min: 5}),
-            check('content').isLength({min: 5}),
-            check('archiveDate').exists({checkNull: false}),
-            check('isArchived').exists({checkFalsy: false})
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => updateOneDocument(req, res)
-    );
+  routes.put('/product',
+    [
+      check('id').isString(),
+      check('name').isLength({min: 4}),
+      check('description').isLength({min: 2}),
+      check('price').exists()
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => updateProduct(req, res)
+  );
 
-    return routes;
+  return routes;
 }

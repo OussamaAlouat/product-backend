@@ -1,6 +1,6 @@
-# NEWS BACKEND
+# PRODUCT BACKEND
 
-It is a simple server that provides the posibility to search news, store them and remove them. It is maked using node express library. This project was maked using node 8.14.0, but you can use every node that you wont, but the version will be equal or upper than node 8.
+It is a simple server that provides the posibility to search products, store and remove them. It is maked using node express library. This project was maked using node 8.14.0, but you can use every node that you wont, but the version will be equal or upper than node 8.
 
 ## COMMANDS
 ### npm run install 
