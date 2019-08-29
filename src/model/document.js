@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import {Schema} from 'mongoose';
 
 
-const DocumentSchema = Schema({
-    title: {
+const ProductSchema = Schema({
+    name: {
         type: String,
         required: true
     },
@@ -11,27 +11,13 @@ const DocumentSchema = Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    content: {
-        type: String,
+    price: {
+        type: Number,
         required: true
     },
-    author: {
+    image: {
         type: String,
         required: true
-    },
-    archiveDate: {
-        type: Date,
-        default: null
-    },
-
-    isArchived: {
-        type: Boolean,
-        default: false
     }
 });
-export default mongoose.model('Document', DocumentSchema);
+export default mongoose.model('Document', ProductSchema);
