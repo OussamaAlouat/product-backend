@@ -1,27 +1,24 @@
-import Document from '../model/document';
+import Product from '../model/product';
 
-const postDocument = (req, res) => {
-    const {title, description, date, content, author, archiveDate, isArchived} = req.body;
+const postProduct = (req, res) => {
+    const {name, description, price, image} = req.body;
 
     //If there are one document with the same title, description, content and author is because is the same document that
     //we will put in our database.
-    Document.find({title, description, author, content})
+    Product.find({name, description, price, image})
         .then((response) => {
             if (response.length > 0) {
                 const errorMessage = 'This document already exists on database';
                 res.status(409).json({message: errorMessage});
             } else {
-                const newDocument = new Document({
-                    title,
+                const newProduct = new Product({
+                    name,
                     description,
-                    date,
-                    content,
-                    author,
-                    archiveDate,
-                    isArchived
+                    price,
+                    image
                 });
 
-                newDocument.save((err, data) => {
+                newProduct.save((err, data) => {
                     if (err) {
                         res.json(err)
                     } else {
@@ -36,8 +33,6 @@ const postDocument = (req, res) => {
 
             }
         })
-
-
 };
 
 const getAllDocuments = (req, res) => {
