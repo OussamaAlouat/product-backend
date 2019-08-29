@@ -51,7 +51,7 @@ const getProducts = (req, res) => {
 };
 
 const getProduct = (req, res) => {
-  const {id} = req.body;
+  const {id} = req.query || req.body;
   Product.findById(id)
     .then((result) => {
       res.status(200).json({data: result});
@@ -82,7 +82,8 @@ const updateProduct = (req, res) => {
   Product.findByIdAndUpdate(id, {
     price,
     description,
-    name
+    name,
+    image
   }).then((result) => {
     const response = {
       message: "Product updated"

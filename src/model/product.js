@@ -17,7 +17,7 @@ const ProductSchema = Schema({
     },
     image: {
         type: String,
-        required: true
+        default: null
     }
 });
 export default mongoose.model('Product', ProductSchema);

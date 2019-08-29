@@ -21,8 +21,7 @@ export default () => {
     [
       check('name').isLength({min: 4}),
       check('description').isLength({min: 2}),
-      check('price').exists(),
-      check('image').exists(),
+      check('price').exists()
     ],
     (req, res, next) => postCheckValidation(req, res, next),
     (req, res) => postProduct(req, res));
@@ -52,8 +51,7 @@ export default () => {
       check('id').isString(),
       check('name').isLength({min: 4}),
       check('description').isLength({min: 2}),
-      check('price').exists(),
-      check('image').exists(),
+      check('price').exists()
     ],
     (req, res, next) => postCheckValidation(req, res, next),
     (req, res) => updateProduct(req, res)
