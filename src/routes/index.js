@@ -6,7 +6,7 @@ import {
   postProduct,
   removeProduct,
   updateProduct
-} from "../controller/document";
+} from "../controller/product";
 
 import {check} from "express-validator/check";
 import {postCheckValidation} from "../middleware/validation";
