@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import {index} from '../controller'
 import {
-    getAllDocuments,
+    getProducts,
     getOneDocument,
     postProduct,
     removeOneDocument,
@@ -27,9 +27,9 @@ export default () => {
         (req, res, next) => postCheckValidation(req, res, next),
         (req, res) => postProduct(req, res));
 
-    routes.get('/documents',
-        getAllDocuments
-    );
+  routes.get('/products',
+    getProducts
+  );
 
     routes.get('/document',
         [

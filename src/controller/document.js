@@ -35,22 +35,20 @@ const postProduct = (req, res) => {
         })
 };
 
-const getAllDocuments = (req, res) => {
-
-    const {state} = req.query;
-
-    if (!state) {
-        Document.find()
-            .then((response) => {
-                res.status(200).json({data: response})
-            })
-    } else {
-        const petition = state === 'archived';
-        Document.find({isArchived: petition})
-            .then((response) => {
-                res.status(200).json({data: response})
-            })
-    }
+const getProducts = (req, res) => {
+  const {state} = req.query;
+  if (!state) {
+    Product.find()
+      .then((response) => {
+        res.status(200).json({data: response})
+      })
+  } else {
+    const petition = state === 'archived';
+    Product.find({isArchived: petition})
+      .then((response) => {
+        res.status(200).json({data: response})
+    })
+  }
 };
 
 const getOneDocument = (req, res) => {
