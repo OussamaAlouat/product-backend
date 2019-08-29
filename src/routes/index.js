@@ -2,7 +2,7 @@ import {Router} from 'express';
 import {index} from '../controller'
 import {
     getProducts,
-    getOneDocument,
+    getProduct,
     postProduct,
     removeOneDocument,
     updateOneDocument
@@ -31,13 +31,13 @@ export default () => {
     getProducts
   );
 
-    routes.get('/document',
-        [
-            check('id').isString()
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => getOneDocument(req, res)
-    );
+  routes.get('/product',
+    [
+      check('id').isString()
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => getProduct(req, res)
+  );
 
     routes.delete('/document',
         [
