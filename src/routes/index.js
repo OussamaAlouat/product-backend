@@ -1,31 +1,31 @@
 import {Router} from 'express';
 import {index} from '../controller'
 import {
-    getProducts,
-    getProduct,
-    postProduct,
-    removeProduct,
-    updateOneDocument
+  getProducts,
+  getProduct,
+  postProduct,
+  removeProduct,
+  updateProduct
 } from "../controller/document";
 
 import {check} from "express-validator/check";
 import {postCheckValidation} from "../middleware/validation";
 
 export default () => {
-    const routes = Router();
-    routes.get('/',
-        (req, res) => index(req, res)
-    );
+  const routes = Router();
+  routes.get('/',
+    (req, res) => index(req, res)
+  );
 
-    routes.post('/product',
-        [
-            check('name').isLength({min: 4}),
-            check('description').isLength({min: 2}),
-            check('price').exists(),
-            check('image').exists(),
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => postProduct(req, res));
+  routes.post('/product',
+    [
+      check('name').isLength({min: 4}),
+      check('description').isLength({min: 2}),
+      check('price').exists(),
+      check('image').exists(),
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => postProduct(req, res));
 
   routes.get('/products',
     getProducts
@@ -56,7 +56,7 @@ export default () => {
       check('image').exists(),
     ],
     (req, res, next) => postCheckValidation(req, res, next),
-    (req, res) => updateOneDocument(req, res)
+    (req, res) => updateProduct(req, res)
   );
 
   return routes;

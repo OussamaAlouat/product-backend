@@ -1,38 +1,37 @@
 import Product from '../model/product';
 
 const postProduct = (req, res) => {
-    const {name, description, price, image} = req.body;
+  const {name, description, price, image} = req.body;
+  //If there are one document with the same title, description, content and author is because is the same document that
+  //we will put in our database.
+  Product.find({name, description, price, image})
+    .then((response) => {
+      if (response.length > 0) {
+        const errorMessage = 'This document already exists on database';
+        res.status(409).json({message: errorMessage});
+      } else {
+        const newProduct = new Product({
+          name,
+          description,
+          price,
+          image
+        });
 
-    //If there are one document with the same title, description, content and author is because is the same document that
-    //we will put in our database.
-    Product.find({name, description, price, image})
-        .then((response) => {
-            if (response.length > 0) {
-                const errorMessage = 'This document already exists on database';
-                res.status(409).json({message: errorMessage});
-            } else {
-                const newProduct = new Product({
-                    name,
-                    description,
-                    price,
-                    image
-                });
+        newProduct.save((err, data) => {
+          if (err) {
+            res.json(err)
+          } else {
 
-                newProduct.save((err, data) => {
-                    if (err) {
-                        res.json(err)
-                    } else {
+            const returnData = {
+              data: data,
+              message:'Document created correctly'
+            };
 
-                        const returnData = {
-                            data: data,
-                            message:'Document created correctly'
-                        };
-                        res.status(201).json(returnData)
-                    }
-                })
-
-            }
+            res.status(201).json(returnData)
+          }
         })
+      }
+    })
 };
 
 const getProducts = (req, res) => {
@@ -100,9 +99,9 @@ const updateProduct = (req, res) => {
 };
 
 export {
-    postDocument,
-    getAllDocuments,
-    getOneDocument,
-    removeOneDocument,
-    updateOneDocument
+  postProduct,
+  getProducts,
+  getProduct,
+  removeProduct,
+  updateProduct
 }
