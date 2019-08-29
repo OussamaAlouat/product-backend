@@ -4,7 +4,7 @@ import {
     getProducts,
     getProduct,
     postProduct,
-    removeOneDocument,
+    removeProduct,
     updateOneDocument
 } from "../controller/document";
 
@@ -39,13 +39,13 @@ export default () => {
     (req, res) => getProduct(req, res)
   );
 
-    routes.delete('/document',
-        [
-            check('id').isString()
-        ],
-        (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => removeOneDocument(req, res)
-    );
+  routes.delete('/product',
+    [
+      check('id').isString()
+    ],
+    (req, res, next) => postCheckValidation(req, res, next),
+    (req, res) => removeProduct(req, res)
+  );
 
     routes.put('/document',
         [

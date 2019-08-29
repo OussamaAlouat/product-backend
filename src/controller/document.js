@@ -62,20 +62,20 @@ const getProduct = (req, res) => {
     })
 };
 
-const removeOneDocument = (req, res) => {
-    const {id} = req.query;
-    Document.findByIdAndRemove(id)
-        .then((result) => {
-            const response = {
-                message: 'Document was delete',
-                document_id: result._id
-            };
+const removeProduct = (req, res) => {
+  const {id} = req.query;
+  Product.findByIdAndRemove(id)
+    .then((result) => {
+      const response = {
+        message: 'Product was delete',
+        product_id: result._id
+      };
 
-            res.status(200).json({response});
-        })
-        .catch((err) => {
-            res.status(200).json({message: 'Document not found'})
-        })
+      res.status(200).json({response});
+    })
+    .catch((err) => {
+      res.status(400).json({message: 'Product not found'})
+    })
 };
 
 const updateOneDocument = (req, res) => {
