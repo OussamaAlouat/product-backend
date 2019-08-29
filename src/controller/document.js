@@ -78,26 +78,25 @@ const removeProduct = (req, res) => {
     })
 };
 
-const updateOneDocument = (req, res) => {
-    const {id, title, description, content, archiveDate, isArchived} = req.body;
-    Document.findByIdAndUpdate(id, {
-        title,
-        description,
-        content,
-        archiveDate,
-        isArchived
-    }).then((result) => {
-        const response = {
-            message: "Document updated"
-        };
+const updateProduct = (req, res) => {
+  const {id, name, description, price, image} = req.body;
+  Product.findByIdAndUpdate(id, {
+    price,
+    description,
+    name
+  }).then((result) => {
+    const response = {
+      message: "Product updated"
+    };
 
-        res.status(200).json(response);
-    }).catch((err) => {
-        const response = {
-            message: "Document not found"
-        };
-        res.status(200).json(response);
-    })
+    res.status(200).json(response);
+  }).catch((err) => {
+    const response = {
+      message: "Document not found"
+    };
+
+  res.status(200).json(response);
+  })
 };
 
 export {
