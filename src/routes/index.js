@@ -3,7 +3,7 @@ import {index} from '../controller'
 import {
     getAllDocuments,
     getOneDocument,
-    postDocument,
+    postProduct,
     removeOneDocument,
     updateOneDocument
 } from "../controller/document";
@@ -17,18 +17,15 @@ export default () => {
         (req, res) => index(req, res)
     );
 
-    routes.post('/document',
+    routes.post('/product',
         [
-            check('title').isLength({min: 4}),
-            check('description').isLength({min: 5}),
-            check('date').exists(),
-            check('content').isLength({min: 5}),
-            check('author').isLength({min: 5}),
-            check('archiveDate').exists({checkNull: false}),
-            check('isArchived').exists({checkFalsy: false})
+            check('name').isLength({min: 4}),
+            check('description').isLength({min: 2}),
+            check('price').exists(),
+            check('image').exists(),
         ],
         (req, res, next) => postCheckValidation(req, res, next),
-        (req, res) => postDocument(req, res));
+        (req, res) => postProduct(req, res));
 
     routes.get('/documents',
         getAllDocuments
